@@ -19,7 +19,7 @@ function init(){
     })
 
 
-    db.query("CREATE TABLE bmiData(email varchar(100),height varchar(100),weight varchar(100),age varchar(100),gender varchar(100),id int not null auto_increment primary key,foreign key(email) references user(email))",
+    db.query("CREATE TABLE bmiData(email varchar(100),height varchar(100),weight varchar(100),age varchar(100),gender varchar(100),id int not null auto_increment primary key,foreign key(email) references user(email),bmi varchar(100))",
     (err,result)=>{
         if(err){
             console.log(err)

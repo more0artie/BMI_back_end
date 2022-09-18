@@ -46,7 +46,7 @@ app.post('/login',(req,res)=>{
 })
 
 app.get('/getData',(req,res)=>{
-    db.query("SELECT * FROM bmiData WHERE email=?",
+    db.query("SELECT * FROM bmiData WHERE email=? ORDER BY id desc",
     [req.query.email],(err,result)=>{
         if(err){
             res.send({message:"ERROR:("})
@@ -58,13 +58,14 @@ app.get('/getData',(req,res)=>{
 })
 
 app.get('/sendData',(req,res)=>{
-    db.query("INSERT INTO bmiData (email,height,weight,age,gender)VALUES WHERE email =?",
-    [req.query.email],(err,result)=>{
+    let rq=req.query
+    db.query("INSERT INTO bmiData (email,height,weight,age,gender,bmi)VALUES (?,?,?,?,?,?)",
+    [rq.email,rq.height,rq.weight,rq.age,rq.gender,rq.bmi],(err,result)=>{
         if(err){
             res.send({message:"ERROR:("})
         }
         else{
-            res.send(result)
+            res.send({message:"Data saved!"})
         }
     })
 })
